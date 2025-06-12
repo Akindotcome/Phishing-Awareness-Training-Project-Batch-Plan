@@ -1,6 +1,4 @@
 #   🗂️ Phishing Awareness Training Project – Batch Plan
-#   Each batch will deliver complete, testable features.
-# I’ll help you with code, database design, UI, and backend logic as we go.
 
 📦 Batch 1: Project Setup & User Authentication
 ✅ Features:
