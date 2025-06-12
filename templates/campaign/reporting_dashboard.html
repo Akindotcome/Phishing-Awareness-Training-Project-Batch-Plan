@@ -1,0 +1,45 @@
+<h2>Reporting Dashboard</h2>
+
+<table border="1">
+    <tr>
+        <th>Campaign</th>
+        <th>Click Rate (%)</th>
+        <th>Quiz Participants</th>
+        <th>Average Quiz Score</th>
+    </tr>
+    {% for report in report_data %}
+    <tr>
+        <td>{{ report.campaign.name }}</td>
+        <td>{{ report.click_rate }}</td>
+        <td>{{ report.quiz_participants }}</td>
+        <td>{{ report.avg_score }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<canvas id="clickChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('clickChart').getContext('2d');
+    const clickChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [{% for report in report_data %}'{{ report.campaign.name }}',{% endfor %}],
+            datasets: [{
+                label: 'Click Rate (%)',
+                data: [{% for report in report_data %}{{ report.click_rate }},{% endfor %}],
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>
+
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
